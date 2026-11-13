@@ -1,0 +1,139 @@
+{
+  "role": "bowling",
+  "engine_version": "4.1.0",
+  "selected_k": 3,
+  "random_state": 42,
+  "n_init": 20,
+  "max_iter": 300,
+  "features": [
+    "economy_rate",
+    "raw_delta_economy",
+    "wickets_per_legal_ball",
+    "dot_ball_pct",
+    "boundary_balls_conceded_per_100_legal_balls"
+  ],
+  "num_features": 5,
+  "primary_sample_size": 219,
+  "cluster_sizes": {
+    "0": 62,
+    "1": 109,
+    "2": 48
+  },
+  "cluster_balance_ratio": 0.4404,
+  "inertia": 578.64,
+  "scaling": {
+    "type": "StandardScaler",
+    "means": {
+      "economy_rate": 9.7793,
+      "raw_delta_economy": -1.4152,
+      "wickets_per_legal_ball": 0.0752,
+      "dot_ball_pct": 33.0697,
+      "boundary_balls_conceded_per_100_legal_balls": 20.9703
+    },
+    "scales": {
+      "economy_rate": 1.5845,
+      "raw_delta_economy": 1.4447,
+      "wickets_per_legal_ball": 0.0251,
+      "dot_ball_pct": 5.8442,
+      "boundary_balls_conceded_per_100_legal_balls": 5.4787
+    }
+  },
+  "imputation_statistics": {
+    "strategy": "continuous_rate_wickets_per_legal_ball",
+    "primary_zero_wickets_count": 3,
+    "emerging_zero_wickets_count": 109,
+    "primary_mean_wickets_per_legal_ball": 0.0752,
+    "primary_median_wickets_per_legal_ball": 0.0742
+  },
+  "excluded_redundant_features": {
+    "reg_econ_base": "Excluded due to exact algebraic identity: raw_delta_economy = reg_econ_base - economy_rate. Retaining all three produces infinite VIF.",
+    "bowling_strike_rate": "Excluded due to division-by-zero divergence when wickets = 0. Replaced by continuous, stable wickets_per_legal_ball.",
+    "raw_delta_dot_pct": "Excluded due to near-collinearity with dot_ball_pct (correlation = -0.835) and algebraic redundancy against reg_dot_base."
+  },
+  "seed_stability": {
+    "seed_100_vs_base": 0.8489,
+    "seed_2024_vs_base": 1.0,
+    "seed_7_vs_base": 1.0,
+    "seed_999_vs_base": 0.9125,
+    "mean_ari": 0.9404
+  },
+  "candidate_validation_summary": [
+    {
+      "k": 2,
+      "silhouette_score": 0.2976,
+      "davies_bouldin_index": 1.1774,
+      "calinski_harabasz_index": 121.77,
+      "inertia": 701.41,
+      "min_cluster_size": 109,
+      "max_cluster_size": 110,
+      "balance_ratio": 0.9909,
+      "cluster_sizes": "{0: 110, 1: 109}"
+    },
+    {
+      "k": 3,
+      "silhouette_score": 0.2263,
+      "davies_bouldin_index": 1.3286,
+      "calinski_harabasz_index": 96.37,
+      "inertia": 578.64,
+      "min_cluster_size": 48,
+      "max_cluster_size": 109,
+      "balance_ratio": 0.4404,
+      "cluster_sizes": "{0: 62, 1: 109, 2: 48}"
+    },
+    {
+      "k": 4,
+      "silhouette_score": 0.2321,
+      "davies_bouldin_index": 1.2567,
+      "calinski_harabasz_index": 89.13,
+      "inertia": 488.05,
+      "min_cluster_size": 25,
+      "max_cluster_size": 98,
+      "balance_ratio": 0.2551,
+      "cluster_sizes": "{0: 60, 1: 25, 2: 36, 3: 98}"
+    },
+    {
+      "k": 5,
+      "silhouette_score": 0.2318,
+      "davies_bouldin_index": 1.1717,
+      "calinski_harabasz_index": 84.06,
+      "inertia": 425.86,
+      "min_cluster_size": 11,
+      "max_cluster_size": 73,
+      "balance_ratio": 0.1507,
+      "cluster_sizes": "{0: 62, 1: 73, 2: 57, 3: 11, 4: 16}"
+    },
+    {
+      "k": 6,
+      "silhouette_score": 0.2132,
+      "davies_bouldin_index": 1.2307,
+      "calinski_harabasz_index": 78.61,
+      "inertia": 384.85,
+      "min_cluster_size": 9,
+      "max_cluster_size": 72,
+      "balance_ratio": 0.125,
+      "cluster_sizes": "{0: 36, 1: 39, 2: 46, 3: 72, 4: 9, 5: 17}"
+    },
+    {
+      "k": 7,
+      "silhouette_score": 0.213,
+      "davies_bouldin_index": 1.1772,
+      "calinski_harabasz_index": 76.7,
+      "inertia": 345.36,
+      "min_cluster_size": 9,
+      "max_cluster_size": 63,
+      "balance_ratio": 0.1429,
+      "cluster_sizes": "{0: 35, 1: 36, 2: 40, 3: 63, 4: 13, 5: 23, 6: 9}"
+    },
+    {
+      "k": 8,
+      "silhouette_score": 0.2055,
+      "davies_bouldin_index": 1.1926,
+      "calinski_harabasz_index": 73.8,
+      "inertia": 317.53,
+      "min_cluster_size": 9,
+      "max_cluster_size": 59,
+      "balance_ratio": 0.1525,
+      "cluster_sizes": "{0: 9, 1: 43, 2: 59, 3: 10, 4: 25, 5: 29, 6: 35, 7: 9}"
+    }
+  ]
+}

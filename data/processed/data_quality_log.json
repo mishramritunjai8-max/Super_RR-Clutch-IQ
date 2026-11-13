@@ -1,0 +1,65 @@
+{
+  "pipeline_version": "1.0.0",
+  "timestamp": "2026-11-12T14:47:57Z",
+  "raw_directory": "data/raw",
+  "processed_directory": "data/processed",
+  "actions_performed": [
+    "Converted revised overs from raw balls to fractional overs (divided by 6).",
+    "Extracted normalized match margin types and post-hoc closeness flag.",
+    "Deduplicated 40 redundant lineup revision rows in playing_eleven (28,341 preserved).",
+    "Resolved missing dismissed_player_id on delivery 127899 to Tilak Varma (7897) for Retire Out.",
+    "Computed legal deliveries, bowler runs conceded, bowler-creditable wickets, and batter dismissals.",
+    "Computed in-match situational close chase pressure without outcome leakage."
+  ],
+  "validation_checks": {
+    "deliveries_count_exact_200999": true,
+    "matches_count_exact_883": true,
+    "players_count_exact_1217": true,
+    "playing_eleven_deduped_exact_28341": true,
+    "bowler_wickets_exact_10272": true,
+    "legal_plus_illegal_equals_total": true,
+    "super_overs_exact_38": true,
+    "close_chase_only_inn2": true,
+    "no_negative_balls_remaining": true,
+    "no_negative_runs_needed": true
+  },
+  "summary_statistics": {
+    "total_deliveries": 200999,
+    "total_legal_balls": 192445,
+    "total_illegal_deliveries": 8554,
+    "total_bowler_wickets": 10272,
+    "total_non_bowler_wickets": 609,
+    "death_primary_deliveries": 44454,
+    "death_stricter_deliveries": 34630,
+    "situational_close_chase_deliveries": 16479,
+    "knockout_deliveries": 7335,
+    "super_over_deliveries": 38,
+    "execution_time_seconds": 1.64
+  },
+  "raw_dimensions": {
+    "competitions": [
+      141,
+      4
+    ],
+    "teams": [
+      353,
+      3
+    ],
+    "matches": [
+      883,
+      22
+    ],
+    "competition_team_player_mapping": [
+      6413,
+      6
+    ],
+    "playing_eleven": [
+      28381,
+      9
+    ],
+    "ball_by_ball": [
+      200999,
+      33
+    ]
+  }
+}

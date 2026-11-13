@@ -1,0 +1,166 @@
+{
+  "engine_version": "4.1.0",
+  "phase4_status": "PHASE 4 FINAL AUDIT APPROVED \u2014 READY FOR PHASE 5",
+  "timestamp": "2026-11-13T16:05:18Z",
+  "execution_time_seconds": 1.87,
+  "methodological_corrections": {
+    "redundant_features_removed": {
+      "batting": [
+        "reg_sr_base",
+        "raw_delta_dot_pct"
+      ],
+      "bowling": [
+        "reg_econ_base",
+        "bowling_strike_rate",
+        "raw_delta_dot_pct"
+      ]
+    },
+    "zero_dismissal_handling": "Original batting_average preserved (NaN when 0 dismissals). is_zero_dismissals indicator added. Feature imputed using primary cohort median (20.93) strictly fitted on primary cohort.",
+    "zero_wicket_handling": "Original bowling_strike_rate preserved (NaN when 0 wickets). is_zero_wickets indicator added. Continuous rate wickets_per_legal_ball employed (0.0 for 0 wickets), avoiding arbitrary strike rate imputation.",
+    "preprocessing": "StandardScaler fitted strictly on primary eligible cohort; emerging cohort transformed via frozen parameters.",
+    "unsupported_claims_removed": "Removed all hardcoded over 16/18 or powerplay assignments. Adopted rigorous scouting language ('candidate profile', 'potential tactical role')."
+  },
+  "batting_summary": {
+    "selected_k": 3,
+    "features_used": [
+      "strike_rate",
+      "raw_delta_strike_rate",
+      "dot_ball_pct",
+      "boundary_ball_pct",
+      "batting_average_imputed"
+    ],
+    "condition_number": 151.95,
+    "primary_players_fitted": 249,
+    "emerging_players_assigned_provisional": 526,
+    "total_batters_profiled": 775,
+    "silhouette_score": 0.307,
+    "davies_bouldin_index": 1.0809,
+    "calinski_harabasz_index": 170.8,
+    "inertia": 521.22,
+    "cluster_balance_ratio": 0.4167,
+    "seed_stability_mean_ari": 1.0,
+    "cluster_breakdown": [
+      {
+        "cluster_id": 0,
+        "archetype_name": "Pressure-Struggling / Low-Tempo Batters",
+        "primary_player_count": 45,
+        "emerging_player_count": 314,
+        "total_player_count": 359,
+        "mean_pressure_strike_rate": 111.67,
+        "mean_raw_delta_strike_rate": -11.72,
+        "mean_dot_ball_pct": 42.96,
+        "mean_boundary_ball_pct": 13.51,
+        "mean_batting_avg_imputed": 10.63,
+        "mean_clutch_iq": 39.04,
+        "representative_players": "Chamika Karunaratne, Keshav Maharaj, Rahul Chahar, Shoriful Islam, Harshit Rana"
+      },
+      {
+        "cluster_id": 1,
+        "archetype_name": "Explosive Pressure Finishers & Boundary Hitters",
+        "primary_player_count": 96,
+        "emerging_player_count": 73,
+        "total_player_count": 169,
+        "mean_pressure_strike_rate": 182.72,
+        "mean_raw_delta_strike_rate": 51.13,
+        "mean_dot_ball_pct": 25.73,
+        "mean_boundary_ball_pct": 25.98,
+        "mean_batting_avg_imputed": 32.4,
+        "mean_clutch_iq": 80.41,
+        "representative_players": "Najibullah Zadran, Tristan Stubbs, Mahendra Singh Dhoni, Sikandar Raza, Akeal Hosein"
+      },
+      {
+        "cluster_id": 2,
+        "archetype_name": "Steady Pressure Anchors & Strike Rotators",
+        "primary_player_count": 108,
+        "emerging_player_count": 139,
+        "total_player_count": 247,
+        "mean_pressure_strike_rate": 149.2,
+        "mean_raw_delta_strike_rate": 23.46,
+        "mean_dot_ball_pct": 30.14,
+        "mean_boundary_ball_pct": 19.09,
+        "mean_batting_avg_imputed": 20.14,
+        "mean_clutch_iq": 65.32,
+        "representative_players": "Jason Holder, Clive Madande, Mark Adair, Karim Janat, Wellington Masakadza"
+      }
+    ]
+  },
+  "bowling_summary": {
+    "selected_k": 3,
+    "features_used": [
+      "economy_rate",
+      "raw_delta_economy",
+      "wickets_per_legal_ball",
+      "dot_ball_pct",
+      "boundary_balls_conceded_per_100_legal_balls"
+    ],
+    "condition_number": 105.22,
+    "primary_players_fitted": 219,
+    "emerging_players_assigned_provisional": 324,
+    "total_bowlers_profiled": 543,
+    "silhouette_score": 0.2263,
+    "davies_bouldin_index": 1.3286,
+    "calinski_harabasz_index": 96.37,
+    "inertia": 578.64,
+    "cluster_balance_ratio": 0.4404,
+    "seed_stability_mean_ari": 0.9404,
+    "cluster_breakdown": [
+      {
+        "cluster_id": 0,
+        "archetype_name": "Economical Pressure Controllers",
+        "primary_player_count": 62,
+        "emerging_player_count": 108,
+        "total_player_count": 170,
+        "mean_pressure_economy": 7.97,
+        "mean_raw_delta_economy": -0.05,
+        "mean_wickets_per_100_balls": 8.25,
+        "mean_dot_ball_pct": 38.24,
+        "mean_boundary_balls_per_100": 15.24,
+        "mean_clutch_iq": 54.49,
+        "representative_players": "Rasikh Salam, Pramod Madushan, Abrar Ahmed, Mohammad Nawaz, Abdul Saqlain"
+      },
+      {
+        "cluster_id": 1,
+        "archetype_name": "Moderate-Containment / Mid-Tier Pressure Bowlers",
+        "primary_player_count": 109,
+        "emerging_player_count": 66,
+        "total_player_count": 175,
+        "mean_pressure_economy": 9.97,
+        "mean_raw_delta_economy": -1.39,
+        "mean_wickets_per_100_balls": 7.61,
+        "mean_dot_ball_pct": 32.48,
+        "mean_boundary_balls_per_100": 21.52,
+        "mean_clutch_iq": 40.3,
+        "representative_players": "Odean Smith, Lizaad Williams, Xavier Bartlett, Kyle Jamieson, Karn Sharma"
+      },
+      {
+        "cluster_id": 2,
+        "archetype_name": "Pressure-Vulnerable / High-Concession Bowlers",
+        "primary_player_count": 48,
+        "emerging_player_count": 150,
+        "total_player_count": 198,
+        "mean_pressure_economy": 11.68,
+        "mean_raw_delta_economy": -3.23,
+        "mean_wickets_per_100_balls": 6.38,
+        "mean_dot_ball_pct": 27.73,
+        "mean_boundary_balls_per_100": 27.12,
+        "mean_clutch_iq": 26.06,
+        "representative_players": "Vyshak Kumar, Nitish Reddy, Shahbaz Ahmed, Tymal Mills, Jaydev Unadkat"
+      }
+    ]
+  },
+  "verification_checks": {
+    "no_clutch_iq_used_in_model_training": true,
+    "no_rank_used_in_model_training": true,
+    "no_super_overs_in_features": true,
+    "exact_redundant_features_removed": true,
+    "zero_leakage_between_primary_and_emerging": true,
+    "unique_player_ids_in_batting_assignments": true,
+    "unique_player_ids_in_bowling_assignments": true,
+    "all_primary_batters_assigned": true,
+    "all_emerging_batters_assigned": true,
+    "all_primary_bowlers_assigned": true,
+    "all_emerging_bowlers_assigned": true,
+    "model_artifacts_saved_and_verifiable": true,
+    "no_unsupported_tactical_claims_in_explanations": true
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "engine_version": "2.0.0",
+  "timestamp": "2026-11-12T14:58:38Z",
+  "execution_time_seconds": 6.26,
+  "source_deliveries_total": 200999,
+  "summary": {
+    "batters_overall_count": 890,
+    "bowlers_overall_count": 647,
+    "batting_pressure_records": 3832,
+    "bowling_pressure_records": 2748,
+    "player_match_records": 18803,
+    "unique_pressure_segments": [
+      "any_pressure",
+      "death_primary",
+      "death_stricter",
+      "close_chase",
+      "knockout",
+      "super_over",
+      "non_pressure_baseline"
+    ]
+  },
+  "segment_deliveries": {
+    "overall_regular": 200961,
+    "non_pressure_baseline": 147508,
+    "any_pressure_union": 53453,
+    "death_primary": 44454,
+    "death_stricter": 34630,
+    "close_chase": 16479,
+    "knockout": 7323,
+    "super_over": 38
+  },
+  "verification_checks": {
+    "sum_of_any_pressure_and_baseline_equals_regular": true,
+    "super_overs_strictly_separated": true,
+    "all_deliveries_accounted": true,
+    "batting_overall_total_runs": 269506,
+    "bowling_overall_total_wickets": 10261,
+    "bowling_overall_runs_conceded": 278054
+  },
+  "run_attribution_audit": {
+    "batter_runs_off_bat": 269506,
+    "total_team_runs": 281418,
+    "total_extras": 11912,
+    "extras_breakdown": {
+      "wides_runs": 7710,
+      "noball_penalties": 839,
+      "noball_extras_2_runs": 83,
+      "byes_runs": 529,
+      "legbyes_runs": 2746,
+      "penalty_runs": 5
+    },
+    "reconciliation_batter_plus_extras_equals_team_runs": true,
+    "bowler_runs_conceded": 278054,
+    "bowler_unearned_team_runs_difference": 3364,
+    "unearned_runs_breakdown": {
+      "byes": 529,
+      "legbyes": 2747,
+      "penalty": 5,
+      "noball_extras_2_runs": 83
+    },
+    "reconciliation_team_minus_unearned_equals_bowler_runs": true
+  }
+}

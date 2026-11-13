@@ -1,0 +1,138 @@
+{
+  "role": "batting",
+  "engine_version": "4.1.0",
+  "selected_k": 3,
+  "random_state": 42,
+  "n_init": 20,
+  "max_iter": 300,
+  "features": [
+    "strike_rate",
+    "raw_delta_strike_rate",
+    "dot_ball_pct",
+    "boundary_ball_pct",
+    "batting_average_imputed"
+  ],
+  "num_features": 5,
+  "primary_sample_size": 249,
+  "cluster_sizes": {
+    "0": 45,
+    "1": 96,
+    "2": 108
+  },
+  "cluster_balance_ratio": 0.4167,
+  "inertia": 521.22,
+  "scaling": {
+    "type": "StandardScaler",
+    "means": {
+      "strike_rate": 155.3422,
+      "raw_delta_strike_rate": 27.7653,
+      "dot_ball_pct": 30.7587,
+      "boundary_ball_pct": 20.7375,
+      "batting_average_imputed": 23.1468
+    },
+    "scales": {
+      "strike_rate": 29.5453,
+      "raw_delta_strike_rate": 28.439,
+      "dot_ball_pct": 8.2281,
+      "boundary_ball_pct": 5.7468,
+      "batting_average_imputed": 13.4936
+    }
+  },
+  "imputation_statistics": {
+    "strategy": "primary_cohort_median",
+    "primary_median_batting_average": 20.93,
+    "primary_mean_batting_average": 23.15,
+    "primary_zero_dismissals_count": 0,
+    "emerging_zero_dismissals_count": 102
+  },
+  "excluded_redundant_features": {
+    "reg_sr_base": "Excluded due to exact algebraic identity: raw_delta_strike_rate = strike_rate - reg_sr_base. Retaining all three produces infinite VIF.",
+    "raw_delta_dot_pct": "Excluded due to near-collinearity with dot_ball_pct (correlation = -0.834) and algebraic redundancy against reg_dot_base."
+  },
+  "seed_stability": {
+    "seed_100_vs_base": 1.0,
+    "seed_2024_vs_base": 1.0,
+    "seed_7_vs_base": 1.0,
+    "seed_999_vs_base": 1.0,
+    "mean_ari": 1.0
+  },
+  "candidate_validation_summary": [
+    {
+      "k": 2,
+      "silhouette_score": 0.3672,
+      "davies_bouldin_index": 0.9864,
+      "calinski_harabasz_index": 192.08,
+      "inertia": 700.37,
+      "min_cluster_size": 101,
+      "max_cluster_size": 148,
+      "balance_ratio": 0.6824,
+      "cluster_sizes": "{0: 148, 1: 101}"
+    },
+    {
+      "k": 3,
+      "silhouette_score": 0.307,
+      "davies_bouldin_index": 1.0809,
+      "calinski_harabasz_index": 170.8,
+      "inertia": 521.22,
+      "min_cluster_size": 45,
+      "max_cluster_size": 108,
+      "balance_ratio": 0.4167,
+      "cluster_sizes": "{0: 45, 1: 96, 2: 108}"
+    },
+    {
+      "k": 4,
+      "silhouette_score": 0.3218,
+      "davies_bouldin_index": 1.0075,
+      "calinski_harabasz_index": 156.61,
+      "inertia": 426.71,
+      "min_cluster_size": 11,
+      "max_cluster_size": 104,
+      "balance_ratio": 0.1058,
+      "cluster_sizes": "{0: 11, 1: 104, 2: 89, 3: 45}"
+    },
+    {
+      "k": 5,
+      "silhouette_score": 0.2982,
+      "davies_bouldin_index": 1.0375,
+      "calinski_harabasz_index": 147.96,
+      "inertia": 363.44,
+      "min_cluster_size": 10,
+      "max_cluster_size": 93,
+      "balance_ratio": 0.1075,
+      "cluster_sizes": "{0: 10, 1: 16, 2: 93, 3: 52, 4: 78}"
+    },
+    {
+      "k": 6,
+      "silhouette_score": 0.2656,
+      "davies_bouldin_index": 1.123,
+      "calinski_harabasz_index": 135.52,
+      "inertia": 328.63,
+      "min_cluster_size": 9,
+      "max_cluster_size": 73,
+      "balance_ratio": 0.1233,
+      "cluster_sizes": "{0: 50, 1: 64, 2: 73, 3: 16, 4: 37, 5: 9}"
+    },
+    {
+      "k": 7,
+      "silhouette_score": 0.2406,
+      "davies_bouldin_index": 1.1938,
+      "calinski_harabasz_index": 129.31,
+      "inertia": 296.0,
+      "min_cluster_size": 9,
+      "max_cluster_size": 62,
+      "balance_ratio": 0.1452,
+      "cluster_sizes": "{0: 59, 1: 15, 2: 34, 3: 41, 4: 29, 5: 62, 6: 9}"
+    },
+    {
+      "k": 8,
+      "silhouette_score": 0.2446,
+      "davies_bouldin_index": 1.1902,
+      "calinski_harabasz_index": 122.15,
+      "inertia": 273.76,
+      "min_cluster_size": 9,
+      "max_cluster_size": 55,
+      "balance_ratio": 0.1636,
+      "cluster_sizes": "{0: 18, 1: 55, 2: 16, 3: 9, 4: 40, 5: 39, 6: 29, 7: 43}"
+    }
+  ]
+}
