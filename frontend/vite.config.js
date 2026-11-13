@@ -13,6 +13,10 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    strictPort: false,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'recharts', 'lucide-react'],
   },
   build: {
     chunkSizeWarningLimit: 600,

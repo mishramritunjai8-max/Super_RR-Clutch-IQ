@@ -1,18 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-// Pages
+// Eager load LandingPage for immediate, ultra-fast initial render
 import LandingPage from './pages/LandingPage';
-import DashboardPage from './pages/DashboardPage';
-import LeaderboardsPage from './pages/LeaderboardsPage';
-import PlayerExplorerPage from './pages/PlayerExplorerPage';
-import PlayerDetailPage from './pages/PlayerDetailPage';
-import PlayerComparisonPage from './pages/PlayerComparisonPage';
-import ArchetypesPage from './pages/ArchetypesPage';
-import PressureAnalyticsPage from './pages/PressureAnalyticsPage';
-import MethodologyPage from './pages/MethodologyPage';
+
+// Lazy load other views for modular resilience and clean chunking
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const LeaderboardsPage = lazy(() => import('./pages/LeaderboardsPage'));
+const PlayerExplorerPage = lazy(() => import('./pages/PlayerExplorerPage'));
+const PlayerDetailPage = lazy(() => import('./pages/PlayerDetailPage'));
+const PlayerComparisonPage = lazy(() => import('./pages/PlayerComparisonPage'));
+const ArchetypesPage = lazy(() => import('./pages/ArchetypesPage'));
+const PressureAnalyticsPage = lazy(() => import('./pages/PressureAnalyticsPage'));
+const MethodologyPage = lazy(() => import('./pages/MethodologyPage'));
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -23,6 +25,18 @@ function ScrollToTop() {
   }, [pathname]);
 
   return null;
+}
+
+// Clean loading state indicator
+function PageFallback() {
+  return (
+    <div className="min-h-[50vh] flex flex-col items-center justify-center space-y-4">
+      <div className="w-10 h-10 border-2 border-[#FFC928]/30 border-t-[#FFC928] rounded-full animate-spin" />
+      <span className="text-xs text-[#A6A9A5] uppercase tracking-widest font-sans">
+        Loading View...
+      </span>
+    </div>
+  );
 }
 
 export default function App() {
@@ -37,20 +51,22 @@ export default function App() {
         {/* Global Navigation */}
         <Navbar />
 
-        {/* Main Content Viewport */}
+        {/* Main Content Viewport with Suspense Protection */}
         <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/leaderboards" element={<LeaderboardsPage />} />
-            <Route path="/players" element={<PlayerExplorerPage />} />
-            <Route path="/players/:id" element={<PlayerDetailPage />} />
-            <Route path="/compare" element={<PlayerComparisonPage />} />
-            <Route path="/archetypes" element={<ArchetypesPage />} />
-            <Route path="/analytics" element={<PressureAnalyticsPage />} />
-            <Route path="/methodology" element={<MethodologyPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/leaderboards" element={<LeaderboardsPage />} />
+              <Route path="/players" element={<PlayerExplorerPage />} />
+              <Route path="/players/:id" element={<PlayerDetailPage />} />
+              <Route path="/compare" element={<PlayerComparisonPage />} />
+              <Route path="/archetypes" element={<ArchetypesPage />} />
+              <Route path="/analytics" element={<PressureAnalyticsPage />} />
+              <Route path="/methodology" element={<MethodologyPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </main>
 
         {/* Global Footer */}

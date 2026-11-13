@@ -207,7 +207,7 @@ export default function MethodologyPage() {
         </h2>
         <GlassCard className="p-6 space-y-3" hover={false}>
           <p className="text-xs sm:text-sm text-[#A6A9A5] leading-relaxed">
-            Following rigorous multicollinearity testing in Phase 4, exact algebraic redundancies were eliminated, reducing feature space condition numbers from $10^{16}$ to $151.95$ (batting) and $105.22$ (bowling). Optimal cluster count $K=3$ was validated using Silhouette Coefficient analysis ($0.3070$ for batting, $0.2263$ for bowling) and cluster balance ratios ($&gt; 0.40$).
+            Following rigorous multicollinearity testing in Phase 4, exact algebraic redundancies were eliminated, reducing feature space condition numbers from 10¹⁶ to 151.95 (batting) and 105.22 (bowling). Optimal cluster count K=3 was validated using Silhouette Coefficient analysis (0.3070 for batting, 0.2263 for bowling) and cluster balance ratios (&gt; 0.40).
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
             <div className="p-3 rounded-xl bg-black/20 border border-white/5">
