@@ -60,11 +60,12 @@ app = FastAPI(
 # ---------------------------------------------------------
 # CORS Middleware
 # ---------------------------------------------------------
+has_wildcard = "*" in settings.CORS_ORIGINS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS if "*" not in settings.CORS_ORIGINS else ["*"],
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_origins=["*"] if has_wildcard else settings.CORS_ORIGINS,
+    allow_credentials=not has_wildcard,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -160,3 +161,9 @@ app.include_router(leaderboards.router, prefix=settings.API_V1_PREFIX)
 app.include_router(players.router, prefix=settings.API_V1_PREFIX)
 app.include_router(archetypes.router, prefix=settings.API_V1_PREFIX)
 app.include_router(analytics.router, prefix=settings.API_V1_PREFIX)
+
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("backend.api.main:app", host="0.0.0.0", port=port, reload=False)

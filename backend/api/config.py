@@ -22,8 +22,8 @@ class Settings:
     MODELS_DIR: Path = BASE_DIR / "models" / "phase4"
     
     # CORS Configuration
-    # Defaults to Vite development server origin; configurable via CORS_ORIGINS env var
-    _cors_env: str = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")
+    # Defaults to allowing all origins (*) in production/cloud, or comma-separated origins via CORS_ORIGINS env var
+    _cors_env: str = os.getenv("CORS_ORIGINS", "*")
     CORS_ORIGINS: List[str] = [origin.strip() for origin in _cors_env.split(",") if origin.strip()]
 
 
