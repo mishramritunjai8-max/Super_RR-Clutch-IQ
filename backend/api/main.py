@@ -11,7 +11,8 @@ from typing import Dict, Any
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -130,10 +131,12 @@ async def generic_exception_handler(request: Request, exc: Exception) -> JSONRes
 
 
 # ---------------------------------------------------------
-# Root & Top-Level Probes
+# Root & Top-Level Probes / Frontend Serving
 # ---------------------------------------------------------
-@app.get("/", summary="Root Welcome & Metadata", tags=["Root"])
-def root_endpoint() -> Dict[str, Any]:
+FRONTEND_DIST = settings.BASE_DIR / "frontend" / "dist"
+
+
+def get_api_welcome_dict() -> Dict[str, Any]:
     return {
         "project": settings.PROJECT_NAME,
         "slogan": settings.PROJECT_SLOGAN,
@@ -144,6 +147,21 @@ def root_endpoint() -> Dict[str, Any]:
         "api_v1_base": settings.API_V1_PREFIX,
         "health_endpoint": f"{settings.API_V1_PREFIX}/health"
     }
+
+
+@app.get("/api", summary="Root API Information", tags=["Root"])
+def api_info_endpoint() -> Dict[str, Any]:
+    return get_api_welcome_dict()
+
+
+@app.get("/", summary="Web Application Root", tags=["Frontend & Root"])
+def root_endpoint(request: Request):
+    index_file = FRONTEND_DIST / "index.html"
+    accept = request.headers.get("accept", "")
+    # Serve React Frontend if HTML requested by browser and dist exists
+    if "text/html" in accept and index_file.is_file():
+        return FileResponse(index_file)
+    return get_api_welcome_dict()
 
 
 # Duplicate root-level health probe for container/orchestrator health checks
@@ -161,6 +179,27 @@ app.include_router(leaderboards.router, prefix=settings.API_V1_PREFIX)
 app.include_router(players.router, prefix=settings.API_V1_PREFIX)
 app.include_router(archetypes.router, prefix=settings.API_V1_PREFIX)
 app.include_router(analytics.router, prefix=settings.API_V1_PREFIX)
+
+
+# ---------------------------------------------------------
+# Mount Frontend Static Assets & SPA Catch-All Route
+# ---------------------------------------------------------
+if FRONTEND_DIST.is_dir() and (FRONTEND_DIST / "index.html").is_file():
+    if (FRONTEND_DIST / "assets").is_dir():
+        app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
+    if (FRONTEND_DIST / "images").is_dir():
+        app.mount("/images", StaticFiles(directory=str(FRONTEND_DIST / "images")), name="images")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa_route(full_path: str):
+        # Do not intercept API, health, docs, or schema routes
+        if full_path.startswith("api") or full_path in ("docs", "redoc", "openapi.json", "health"):
+            raise StarletteHTTPException(status_code=404, detail="Not Found")
+        
+        target_file = FRONTEND_DIST / full_path
+        if full_path and target_file.is_file():
+            return FileResponse(target_file)
+        return FileResponse(FRONTEND_DIST / "index.html")
 
 
 if __name__ == "__main__":
